@@ -43,11 +43,11 @@ class Users {
           password
         })
         .then(userData => res.status(201).send({
-          success: true,
+          status: 201,
           message: 'User successfully created',
           userData
         })).catch((error) => {
-          res.status(500).send({ error: error.errors[0].message });
+          res.status(500).send({ status: 500, error: error.errors[0].message });
         })
     }
     static async DeleteUser(req,res){
@@ -112,7 +112,7 @@ class Users {
       }
       return res.status(404).json({
         status: 404,
-        message: `email or password is incorrect`
+        error: `email or password is incorrect`
       });
     } catch (error) {
       return res.status(500).json({
