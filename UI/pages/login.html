@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>LogIN | Welcome </title>
+        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="../fontawesome-free/css/all.css">
+    </head>
+    <body>
+
+        <div class="login-box">
+            <form id="signin-form">
+            <h1>Login</h1>
+            <div class="textbox">
+                <i class="fas fa-user"></i>
+                <input type="email" placeholder="Email" name="" id="username">
+            </div>
+            <div class="textbox">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" name="" id="password">
+            </div>
+            <input class="btn" type="submit" value="Signin" name="">
+            </form>
+        </div>
+
+        <script>
+                document.getElementById('signin-form').addEventListener('submit', login);
+    
+                function login(e) {
+                    e.preventDefault();
+    
+                    let email = document.getElementById('username').value;
+                    let password = document.getElementById('password').value;
+    
+                    fetch('http://localhost:5000/api/users/signin', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json, text/plain, */*',
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password,
+                        })
+                    }).then((res) => res.json())
+                    .then((data) => {
+                        console.log(data)
+                        if(data.status === 200){
+                            window.location.replace('admin.html')
+                        }
+                        else {
+                            console.log(data);
+                        }
+                    })
+                }
+            </script>
+
+    </body>
+</html>

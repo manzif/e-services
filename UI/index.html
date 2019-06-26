@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>E-services | Welcome </title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div id="branding">
+                    <h1><span class="highlight">E</span>-Service</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="current"><a href="index.html">Home</a></li>
+                        <li><a href="./pages/services.html">SERvices</a></li>
+                        <li><a href="./pages/about.html">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <section id="showcase">
+            <div class="container">
+                <h1>Best Services at a Fair Price</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum eu risus a auctor. Vestibulum id mi interdum, tincidunt sapien nec, pulvinar tortor. Suspendisse sit amet pellentesque ipsum, sed euismod mi. Nam nec enim et arcu molestie iaculis vel a magna. Quisque rhoncus orci urna, vitae tempus eros convallis nec. Integer auctor ut enim vitae eleifend. Integer in quam eu lectus maximus commodo. Etiam sit amet ante vel nulla hendrerit pulvinar. Nullam lacinia faucibus ante non dictum.</p>
+            </div>
+        </section>
+        <section id="subscription">
+            <div class="container">
+                <div>
+                    <h1>Create account to our E-services</h1>
+                    <form id="signup-form">
+                        <input type="text" placeholder="Enter Your Names" name="name" id="name">
+                        <input type="email" placeholder="Enter Email ..." name="email" id="email">
+                        <button type="submit" class="button_1">Save</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section id="service">
+            <div class="container">
+                <div class="service1">
+                    <img src="./image/home-painting2.jpg">
+                    <h3><a href="./pages/painting.html">House Paintings</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </div>
+                <div class="service1">
+                    <img src="./image/teach.jpg">
+                    <h3><a href="./pages/teach.html">Teaching English</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </div>
+                <div class="service1">
+                    <img src="./image/car renting.jpg">
+                    <h3><a href="./pages/car.html">Car renting</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <a href="./pages/login.html">Administration</a>
+            <p>E-services, copyright &copy; 2019</p>
+        </footer>
+        <script>
+            document.getElementById('signup-form').addEventListener('submit', signup);
+
+            function signup(e) {
+                e.preventDefault();
+
+                let fullname = document.getElementById('name').value;
+                let email = document.getElementById('email').value;
+
+                fetch('http://localhost:5000/api/users', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fullname: fullname,
+                        email: email
+                    })
+                }).then((res) => res.json())
+                .then((data) => {console.log(data)})
+            }
+        </script>
+    </body>
+</html>
