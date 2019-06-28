@@ -75,18 +75,31 @@ class Services {
         res.status(500).send({ status: 500, error: 'Internal Server Error' });
       });
   }
-  static async DeleteService(req, res) {
+
+  static async getService(req, res) {
     try {
       const id = parseInt(req.params.id);
-      const { rows, rowCount } = await Service.delete(id);
-      if (rowCount == 0)
-        return res.status(400).json({
-          status: 400,
-          error: 'Service does not exist Please check your id try Again!!'
-        });
-      return res.status(200).json({
-        status: 200,
-        message: 'Service was successfuly deleted'
+      const service = await Service.findOne({ where: { id: id } });
+      if (service){
+        const result = {
+          title: service.title,
+          company: service.company,
+          description: service.description,
+          image:
+            req.protocol +
+            '://' +
+            req.headers.host +
+            '/uploads/' +
+            service.image
+        };
+          return res.status(200).json({
+            status: 200,
+            data: result
+          });
+      }
+      return res.status(400).json({
+        status: 400,
+        error: 'Service does not exist Please check your id try Again!!'
       });
     } catch (error) {
       return res.status(500).json({
@@ -95,24 +108,64 @@ class Services {
       });
     }
   }
-  //   static async signin(req, res) {
-  //     try {
-  //         const findUser = await User.findOne({
-  //           where: { email: req.body.email.toLowerCase(), password: req.body.password }
-  //         });
-  //         if (findUser.rowCount === 0) {
-  //             return res.status(400).json({ status: 400, error: 'Incorrect username or password' });
-  //         }
-  //         else{
-  //             return res.status(200).json({ status: 200, data: user.rows });
-  //         }
-  //     } catch (error) {
-  //         return res.status(400).json({
-  //             status: 400,
-  //             error,
-  //         });
-  //     }
-  // }
+
+  static async DeleteService(req, res) {
+    try {
+      const id = parseInt(req.params.id);
+      const service = await Service.destroy({ where: { id: id } });
+      if (service){
+        const result = {
+          title: service.title,
+          company: service.company,
+          description: service.description,
+          image:
+            req.protocol +
+            '://' +
+            req.headers.host +
+            '/uploads/' +
+            service.image
+        };
+          return res.status(200).json({
+            status: 200,
+            data: 'services deleted successfully'
+          });
+      }
+      return res.status(400).json({
+        status: 400,
+        error: 'Service does not exist Please check your id try Again!!'
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error
+      });
+    }
+  }
+  static async deleteMember(req,res){
+    try {
+        const id = parseInt(req.params.id);
+        const findService = await Service.findOne(
+          { where: { id: id}}
+        );
+        if(findService){
+        await Service.destroy({where:
+        {id:id}})
+        return res.status(200).json({
+            status:200,
+            message:'User was successfuly deleted'
+        });
+      }
+        return res.status(400).json({
+          status: 400,
+          error: `Service does not exist or already deleted`
+        });
+      } catch (error) {
+        return res.status(500).json({
+            status:500,
+            error
+        }) 
+      }
+}
 }
 
 export default Services;

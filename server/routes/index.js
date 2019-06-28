@@ -1,6 +1,7 @@
 import multer from 'multer';
 import Users from '../controllers/user';
 import Services from '../controllers/services';
+import Opay from '../controllers/payment';
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -40,4 +41,7 @@ const upload = multer({
           app.post('/api/users/signin', Users.signin);
           app.post('/api/services', upload.single('image'), Services.post)
           app.get('/api/services',  Services.list)
+          app.get('/api/services/:id',  Services.getService)
+          app.delete('/api/services/:id',  Services.deleteMember)
+          app.post('/api/pay/receive', Opay.receiveCallback);
 };

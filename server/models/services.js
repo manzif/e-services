@@ -15,7 +15,7 @@ export default (sequelize, DataTypes) => {
       }
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: {
         args: false,
         msg: 'Pease input a description'

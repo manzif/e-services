@@ -16,6 +16,7 @@
           <ul>
             <li class="current"><a href="index.html">Home</a></li>
             <li><a href="./pages/services.html">SERvices</a></li>
+            <li><a href="./pages/post.html">Post A Service</a></li>
             <li><a href="./pages/about.html">About</a></li>
           </ul>
         </nav>
@@ -95,8 +96,11 @@
               error_msg.style.display = 'block';
               error_msg.innerHTML = data.error;
             } else {
+              error_msg.style.display = 'none';
               success_msg.style.display = 'block';
               success_msg.innerHTML = data.message;
+              document.getElementById('name').value = '';
+              document.getElementById('email').value = '';
             }
             console.log(data);
           });
@@ -114,13 +118,17 @@
         .then(res => res.json())
         .then(data => {
           console.log(data);
-          data.forEach(function(service) {
+          for (var i = data.length - 1; i >= 0; i--) {
+            var description1 = data[i].description.substring(0,97) + '...';
             services.innerHTML += `<div class="service1">
-          <img src="${service.image}" />
-          <h3><a href="./pages/painting.html">${service.title}</a></h3>
-          <p>${service.description}</p>
-        </div>`;
-          });
+                                    <img src="${data[i].image}" />
+                                    <h3><a href="./pages/teach.html?id=${data[i].id}">${
+                                      data[i].title
+                                    }</a></h3>
+                                    <p>${data[i].description.length>100?description1:data[i].description.substring(0,100)}</p>
+                                    </div>`;
+            if (i === data.length - 3) break;
+          }
         });
     </script>
   </body>

@@ -51,41 +51,30 @@ class Users {
         })
     }
     static async DeleteUser(req,res){
-        
         try {
             const id = parseInt(req.params.id);
-            const {rows, rowCount} = await User.delete(id)
-            if(rowCount == 0)
-            return res.status(400).json({ status: 400, error: 'User does not exist Please check your id try Again!!' });
+            const findUser = await User.findOne(
+              { where: { id: id}}
+            );
+            if(findUser){
+            await User.destroy({where:
+            {id:id}})
             return res.status(200).json({
                 status:200,
                 message:'User was successfuly deleted'
-            })
-        } catch (error) {
+            });
+          }
+            return res.status(400).json({
+              status: 400,
+              error: `User does not exist or already deleted`
+            });
+          } catch (error) {
             return res.status(500).json({
                 status:500,
                 error
-            })
-        }
+            }) 
+          }
     }
-  //   static async signin(req, res) {
-  //     try {
-  //         const findUser = await User.findOne({
-  //           where: { email: req.body.email.toLowerCase(), password: req.body.password }
-  //         });
-  //         if (findUser.rowCount === 0) {
-  //             return res.status(400).json({ status: 400, error: 'Incorrect username or password' });
-  //         }
-  //         else{
-  //             return res.status(200).json({ status: 200, data: user.rows });
-  //         }
-  //     } catch (error) {
-  //         return res.status(400).json({
-  //             status: 400,
-  //             error,
-  //         });
-  //     }
-  // }
   static async signin(req, res) {
     try {
       const findUser = await User.findOne({

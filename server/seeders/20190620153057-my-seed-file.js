@@ -13,8 +13,8 @@ module.exports = {
       }], {});
     */
    return queryInterface.bulkInsert('Users', [{
-    fullname: 'Mbabazi Alexia',
-    email: 'mbabazi@gmail.com',
+    fullname: 'Manirakora Alexia',
+    email: 'maniralexie@gmail.com',
     password: 'Password12',
     createdAt : new Date(),
     updatedAt : new Date(),
@@ -30,7 +30,7 @@ module.exports = {
       return queryInterface.bulkDelete('People', null, {});
     */
    queryInterface.bulkDelete('Vendors', [{
-    fullname :'Mbabazi Alexia'
+    fullname :'Manirakora Alexia'
   }]);
   }
 };

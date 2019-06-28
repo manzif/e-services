@@ -16,6 +16,7 @@
                     <ul>
                         <li><a href="../index.html">Home</a></li>
                         <li><a href="services.html">SERvices</a></li>
+                        <li><a href="./post.html">Post A Service</a></li>
                         <li class="current"><a href="about.html">About</a></li>
                     </ul>
                 </nav>
@@ -25,9 +26,11 @@
             <div class="container">
                 <div>
                     <h1>Create account to our E-services</h1>
-                    <form>
-                        <input type="text" placeholder="Enter Your Names">
-                        <input type="email" placeholder="Enter Email ...">
+                    <form id="signup-form">
+                        <div id="error-msg2" class="error-msg"></div>
+                        <div id="success-msg2" class="success-msg"></div>
+                        <input type="text" placeholder="Enter Your Names" id="name">
+                        <input type="email" placeholder="Enter Email ..." id="email">
                         <button type="submit" class="button_1">Save</button>
                     </form>
                 </div>
@@ -53,6 +56,43 @@
             <a href="login.html">Administration</a>
             <p>E-services, copyright &copy; 2019</p>
         </footer>
-
+        <script>
+                document.getElementById('signup-form').addEventListener('submit', signup);
+          
+                function signup(e) {
+                  e.preventDefault();
+          
+                  let fullname = document.getElementById('name').value;
+                  let email = document.getElementById('email').value;
+                  let error_msg = document.getElementById('error-msg2');
+                  let success_msg = document.getElementById('success-msg2');
+          
+                  fetch('http://localhost:5000/api/users', {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'application/json, text/plain, */*',
+                      'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      fullname: fullname,
+                      email: email
+                    })
+                  })
+                    .then(res => res.json())
+                    .then(data => {
+                      if (data.status !== 201) {
+                        error_msg.style.display = 'block';
+                        error_msg.innerHTML = data.error;
+                      } else {
+                        error_msg.style.display = 'none';
+                        success_msg.style.display = 'block';
+                        success_msg.innerHTML = data.message;
+                        document.getElementById('name').value = '';
+                        document.getElementById('email').value = '';
+                      }
+                      console.log(data);
+                    });
+                }
+        </script>
     </body>
 </html>

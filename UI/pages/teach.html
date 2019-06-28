@@ -1,79 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>E-services | Service </title>
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <div id="branding">
-                    <h1><span class="highlight">E</span>-Service</h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li class="current"><a href="services.html">SERvices</a></li>
-                        <li><a href="./about.html">About</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <section id="subscription">
-            <div class="container">
-                <div>
-                    <h1>Create account to our E-services</h1>
-                    <form>
-                        <input type="email" placeholder="Enter Email ...">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" class="button_1">Save</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-        <section id="main">
-            <div class="container">
-                <article id="main-col1">
-                    <h1 class="page-title">Service</h1>
-                    <ul id="host">
-                        <li>
-                            <h3>We Teach English</h3>
-                            <p>Etiam nec egestas neque, non egestas dui. Integer at arcu a arcu consectetur mollis non non elit. Pellentesque viverra diam ac accumsan sodales. Donec nibh dui, malesuada ut maximus ac, aliquam in nulla. Duis ac tellus tristique, elementum urna nec, suscipit ligula. Aenean mattis, purus id interdum ultrices, justo dolor aliquam nisl, id lacinia enim quam non urna. Quisque enim arcu, semper ac imperdiet id, placerat ut odio. Morbi et efficitur nulla. In lobortis mollis odio, vel aliquet lorem placerat eu.</p>
-                            <img src="../image/teach.jpg">
-                            <p>Etiam nec egestas neque, non egestas dui. Integer at arcu a arcu consectetur mollis non non elit. Pellentesque viverra diam ac accumsan sodales. Donec nibh dui, malesuada ut maximus ac, aliquam in nulla. Duis ac tellus tristique, elementum urna nec, suscipit ligula. Aenean mattis, purus id interdum ultrices, justo dolor aliquam nisl, id lacinia enim quam non urna. Quisque enim arcu, semper ac imperdiet id, placerat ut odio. Morbi et efficitur nulla. In lobortis mollis odio, vel aliquet lorem placerat eu.</p>
-                        </li>
-                    </ul>
-                </article>
-                <aside id="sidebar">
-                    <div class="dark">
-                        <h3>Get contacts</h3>
-                        <form class="contact">
-                            <div>
-                                <label>Names</label><br>
-                                <input type="text" placeholder="Enter Full Names...">
-                            </div>
-                            <div>
-                                <label>Id</label><br>
-                                <input type="number" placeholder="Enter your Id...">
-                            </div>
-                            <div>
-                                <label>Names</label><br>
-                                <input type="text" placeholder="Enter Full Names...">
-                            </div>
-                            <div>
-                                <button type="submit" class="button_1">Send</button>
-                            </div>
-                        </form>
-                    </div>
-                </aside>
-            </div>
-        </section>
-        <footer>
-            <a href="login.html">Administration</a>
-            <p>E-services, copyright &copy; 2019</p>
-        </footer>
-
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>E-services | Service</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="branding">
+          <h1><span class="highlight">E</span>-Service</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li class="current"><a href="services.html">SERvices</a></li>
+            <li><a href="./post.html">Post A Service</a></li>
+            <li><a href="./about.html">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section id="subscription">
+      <div class="container">
+        <div>
+          <h1>Create account to our E-services</h1>
+          <form>
+              <input type="text" placeholder="Enter Your Names">
+              <input type="email" placeholder="Enter Email ...">
+            <button type="submit" class="button_1">Save</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section id="main">
+      <div class="container">
+        <article id="main-col1">
+          <h1 class="page-title">Service</h1>
+          <ul id="host"></ul>
+        </article>
+      </div>
+    </section>
+    <footer>
+      <a href="login.html">Administration</a>
+      <p>E-services, copyright &copy; 2019</p>
+    </footer>
+    <script>
+      var urlParams = new URLSearchParams(location.search);
+      var id = urlParams.get('id');
+      let service = document.getElementById('host');
+      fetch(`http://localhost:5000/api/services/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-type': 'application/json'
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          service.innerHTML = `<li>
+              <h3>${data.data.title}</h3>
+              <img src="${data.data.image}" />
+              <p>${data.data.description}</p>
+            </li>`;
+        });
+    </script>
+  </body>
 </html>
