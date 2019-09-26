@@ -2,7 +2,7 @@
   "name": "E-services",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon --exec babel-node app.js"
   },
@@ -17,6 +17,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
