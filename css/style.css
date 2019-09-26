@@ -1,0 +1,237 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+/* used everywhere*/
+.container{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+ul{
+    margin: 0;
+    padding: 0;
+}
+.button_1{
+    height: 38px;
+    background: #e8491d;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ffffff;
+}
+.dark{
+    padding: 15px;
+    background: #35424a;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/*header*/
+
+
+header{
+    background: #35424a;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #e8491d 3px solid;
+}
+header a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: uppercase;
+} 
+header li{
+    padding: 0 20px 0 20px;
+    display: inline;
+}
+header #branding{
+    float: left;
+}
+header #branding h1{
+    margin: 0;
+}
+header nav{
+    float: right;
+    margin-top: 10px;
+}
+header .highlight, header .current a{
+    color: #e8491d;
+    font-weight: bold;
+}
+header a:hover{
+    color: #cccccc;
+    font-weight: bold;
+}
+/*showcase*/
+
+#showcase{
+    min-height: 400px;
+    background: url('../image/banka4.jpg') no-repeat 0;
+    text-align: center;
+    color: #ffffff;
+}
+#showcase h1{
+    margin-top: 100px;
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+#showcase p{
+    font-size: 20px;
+}
+/*subscription*/
+
+#subscription{
+    color: #ffffff;
+    padding: 15px; 
+    background: #35424a;
+}
+#subscription h1{
+    float: left;
+}
+#subscription form{
+    float: right;
+    margin-top: 17px;
+}
+#subscription input[type="email"], input[type="password"]{
+    padding: 4px;
+    height: 25px;
+    width: 250px;
+}
+/*service */
+#service{
+    margin-top: 20px;
+}
+#service .service1{
+    float: left;
+    text-align: center;
+    width: 30%;
+    padding: 10px;
+}
+#service .service1 img{
+    width: 200px;
+    height: 200px;
+}
+/*sidebar*/
+aside {
+    float: right;
+    width: 30%;
+    margin-top: 10px;
+}
+article{
+    float: left;
+    width: 65%;
+}
+
+/*services*/
+
+#host li{
+    list-style: none;
+    padding: 20px;
+    border: #cccccc solid 1px;
+    margin-bottom: 5px;
+    background: #e6e6e6;
+}
+form #contact , input[type="text"], input[type="number"]{
+    width: 90%;
+    padding: 5px;
+}
+#host li a{
+    text-decoration: none;
+    color: #000000;
+}
+#host li a:hover{
+    color: #e8491d;
+    font-weight: bold;
+}
+.service1 a{
+    text-decoration: none;
+    color: #000000;
+}
+.service1 a:hover{
+    color: #e8491d;
+    font-weight: bold;
+}
+#host img{
+    width: 100%;
+    height: 400px;
+}
+/*Post a service*/
+.post{
+    list-style: none;
+    padding: 20px;
+    border: #cccccc solid 1px;
+    margin-bottom: 5px;
+    background: #e6e6e6;
+    margin-top: 10px;
+} 
+form #post1 .post2{
+    width: 70%;
+    color: #000000;
+}
+form #post1 , input[type="file"], input[type="text"]{   
+ padding: 7px;
+ margin-bottom: 5px;
+}
+form #post1 , input[type="file"]{
+    width: 90%;
+}
+form #post1 , input[type="text"]{
+    width: 43.3%;
+    float: left;
+    margin-right: 5px;
+}
+#post1 textarea{
+    width: 90%;
+    height: 400px;
+}
+
+/*footer*/
+footer{
+    padding: 20px;
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: #e8491d;
+    text-align: center;
+}
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+a:hover{
+    color: #cccccc;
+    font-weight: bold;
+}
+
+/*media querries*/
+
+@media (max-width: 768px){
+    header #branding, header nav, header nav li, #service  .service1{
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+    header{
+        padding-bottom: 10px;
+    }
+    #showcase h1{
+        margin-top: 40px;
+    }
+    #subscription input{
+        margin-bottom: 5px;
+    }
+    #main-col, #sidebar{
+        float: none;
+        width: 100%;
+    }
+    #main-col1{
+        float: none;
+        width: 100%;
+    }
+}

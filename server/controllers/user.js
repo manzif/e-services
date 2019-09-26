@@ -34,21 +34,30 @@ class Users {
     //             console.log(err)
     //         })
     // }
-    static signUp(req, res) {
-    const { fullname, email, password} = req.body
-      return User
-        .create({
-          fullname,
-          email,
-          password
-        })
-        .then(userData => res.status(201).send({
-          status: 201,
-          message: 'User successfully created',
-          userData
-        })).catch((error) => {
+    static async signUp(req, res) {
+    try{  
+    const user = {
+       fullname: req.body.fullname, 
+       email :req.body.email, 
+       password : req.body.password
+      } 
+      const findUser = await User.findOne({
+        where: { email: req.body.email }
+      });
+        if (!findUser) {
+          User.create(user)
+          return res.status(201).json({
+            status:201,
+            message:'User was successfuly created'
+        });
+        }else{
+          return res.status(202).json({
+            message: 'Email already taken.'
+          });
+        }
+        }catch(error) {
           res.status(500).send({ status: 500, error: error.errors[0].message });
-        })
+        }
     }
     static async DeleteUser(req,res){
         try {
