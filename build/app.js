@@ -8,7 +8,7 @@ var _morgan = _interopRequireDefault(require("morgan"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
-var _routes = _interopRequireDefault(require("./server/routes"));
+var _routes = _interopRequireDefault(require("./routes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
