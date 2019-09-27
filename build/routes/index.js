@@ -13,6 +13,8 @@ var _services = _interopRequireDefault(require("../controllers/services"));
 
 var _payment = _interopRequireDefault(require("../controllers/payment"));
 
+var _express = _interopRequireDefault(require("express"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var storage = _multer["default"].diskStorage({
@@ -40,23 +42,23 @@ var upload = (0, _multer["default"])({
   fileFilter: fileFilter
 });
 
-var _default = function _default(app) {
-  app.get('/api', function (req, res) {
-    return res.status(200).send({
-      message: 'Welcome to E-services API!'
-    });
+var app = _express["default"].Router();
+
+app.get('/api', function (req, res) {
+  return res.status(200).send({
+    message: 'Welcome to E-services API!'
   });
-  app.post('/api/users', _user["default"].signUp); // API route for user to signup
+});
+app.post('/api/users', _user["default"].signUp); // API route for user to signup
 
-  app.get('/api/users', _user["default"].list); //   app.get('/api/users', Users.listOne);
+app.get('/api/users', _user["default"].list); //   app.get('/api/users', Users.listOne);
 
-  app["delete"]('/api/users/:id', _user["default"].DeleteUser);
-  app.post('/api/users/signin', _user["default"].signin);
-  app.post('/api/services', upload.single('image'), _services["default"].post);
-  app.get('/api/services', _services["default"].list);
-  app.get('/api/services/:id', _services["default"].getService);
-  app["delete"]('/api/services/:id', _services["default"].deleteMember);
-  app.post('/api/pay/receive', _payment["default"].receiveCallback);
-};
-
+app["delete"]('/api/users/:id', _user["default"].DeleteUser);
+app.post('/api/users/signin', _user["default"].signin);
+app.post('/api/services', upload.single('image'), _services["default"].post);
+app.get('/api/services', _services["default"].list);
+app.get('/api/services/:id', _services["default"].getService);
+app["delete"]('/api/services/:id', _services["default"].deleteMember);
+app.post('/api/pay/receive', _payment["default"].receiveCallback);
+var _default = app;
 exports["default"] = _default;
