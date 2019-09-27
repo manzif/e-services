@@ -81,6 +81,7 @@
 
         fetch('http://localhost:5000/api/users', {
           method: 'POST',
+          mode: 'cors',
           headers: {
             Accept: 'application/json, text/plain, */*',
             'Content-type': 'application/json'
@@ -109,6 +110,7 @@
       let services = document.getElementById('services');
       fetch('http://localhost:5000/api/services', {
         method: 'GET',
+        mode: 'cors',
         headers: {
           Accept: 'application/json, text/plain, */*',
           'Content-type': 'application/json'

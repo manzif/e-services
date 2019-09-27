@@ -2,6 +2,7 @@ import multer from 'multer';
 import Users from '../controllers/user';
 import Services from '../controllers/services';
 import Opay from '../controllers/payment';
+import express from 'express'
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -28,8 +29,7 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-        export default (app) => {
-
+          const app = express.Router();
           app.get('/api', (req, res) => res.status(200).send({
             message: 'Welcome to E-services API!',
           }));
@@ -44,4 +44,5 @@ const upload = multer({
           app.get('/api/services/:id',  Services.getService)
           app.delete('/api/services/:id',  Services.deleteMember)
           app.post('/api/pay/receive', Opay.receiveCallback);
-};
+          
+          export default app;
