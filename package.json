@@ -1,12 +1,12 @@
 {
-  "name": "E-services",
+  "name": "e-services",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --exec babel-node ./server/app.js",
     "prod_seeds": "sequelize db:seed --seed 20190930072426-user",
-    "build": "sequelize db:migrate:undo:all && sequelize db:migrate && npm run prod_seeds && ./node_modules/.bin/babel ./server -d ./build",
+    "build": "sequelize db:migrate:undo:all && sequelize db:migrate && npm run prod_seeds && ./node_modules/.bin/babel ./server -d ./build && mkdirp ./build/uploads",
     "start": "node --require @babel/polyfill ./build/app.js"
   },
   "keywords": [],
@@ -23,6 +23,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mkdirp": "^0.5.1",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
     "pg": "^7.11.0",
