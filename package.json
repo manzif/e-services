@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --exec babel-node ./server/app.js",
-    "build": "./node_modules/.bin/babel ./server -d ./build",
+    "prod_seeds": "sequelize db:seed --seed 20190930072426-user",
+    "build": "sequelize db:migrate:undo:all && sequelize db:migrate && npm run prod_seeds && ./node_modules/.bin/babel ./server -d ./build",
     "start": "node --require @babel/polyfill ./build/app.js"
   },
   "keywords": [],
@@ -26,6 +27,7 @@
     "multer": "^1.4.1",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.8.10"
+    "sequelize": "^5.19.1",
+    "sequelize-cli": "^5.5.1"
   }
 }

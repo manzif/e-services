@@ -10,20 +10,14 @@ var _bodyParser = _interopRequireDefault(require("body-parser"));
 
 var _routes = _interopRequireDefault(require("./routes"));
 
+var _cors = _interopRequireDefault(require("cors"));
+
+require("@babel/polyfill");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var hostname = '127.0.0.1';
-var port = 5000;
 var app = (0, _express["default"])();
-
-var server = _http["default"].createServer(app);
-
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS, DELETE, PATCH');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  next();
-});
+app.use((0, _cors["default"])());
 app.use((0, _morgan["default"])('dev'));
 app.use('/uploads', _express["default"]["static"]('server/uploads'));
 app.use(_bodyParser["default"].json({
@@ -31,13 +25,15 @@ app.use(_bodyParser["default"].json({
 }));
 app.use(_bodyParser["default"].urlencoded({
   extended: false
-}));
-(0, _routes["default"])(app);
+})); // routes(app);
+
+app.use(_routes["default"]);
 app.get('*', function (req, res) {
   return res.status(200).send({
-    message: 'Welcome to the .'
+    message: 'Welcome to the E-service'
   });
 });
-server.listen(port, hostname, function () {
-  console.log("Server running at http://".concat(hostname, ":").concat(port, "/"));
+var port = process.env.PORT || 5000;
+app.listen(port, function () {
+  console.log("listening on port ".concat(port, "..."));
 });
