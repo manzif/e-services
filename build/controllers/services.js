@@ -42,31 +42,7 @@ function () {
         });
         res.status(200).send(services);
       });
-    } // static listOne(req, res) {
-    //     const id = req.params.id
-    //     User.findOne({
-    //         where: {
-    //             id: req.params.id
-    //         }
-    //     })
-    //         .then(user => {
-    //             if (!user) {
-    //                      .then(User=> res.status(201).send(User));
-    //                     .catch(err => {
-    //                         res.status(400).send('error' + err);
-    //                     })
-    //             }
-    //             else {
-    //                 res.status(409).json({
-    //                     error: 'user already exist' })
-    //             }
-    //         })
-    //         .catch(err => {
-    //             res.status(400).send('error' + err);
-    //             console.log(err)
-    //         })
-    // }
-
+    }
   }, {
     key: "post",
     value: function post(req, res) {
@@ -95,7 +71,7 @@ function () {
       })["catch"](function (error) {
         res.status(500).send({
           status: 500,
-          error: 'Internal Server Error'
+          error: error
         });
       });
     }
