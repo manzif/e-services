@@ -71,7 +71,7 @@ function () {
       })["catch"](function (error) {
         res.status(500).send({
           status: 500,
-          error: error
+          error: 'Internal Server Error'
         });
       });
     }

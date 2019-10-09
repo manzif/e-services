@@ -50,7 +50,7 @@
       var urlParams = new URLSearchParams(location.search);
       var id = urlParams.get('id');
       let service = document.getElementById('host');
-      fetch(`http://localhost:5000/api/services/${id}`, {
+      fetch(`https://e-services-manzi.herokuapp.com/api/services/${id}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json, text/plain, */*',

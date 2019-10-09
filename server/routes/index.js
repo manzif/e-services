@@ -36,7 +36,6 @@ const upload = multer({
 
           app.post('/api/users', Users.signUp); // API route for user to signup
           app.get('/api/users', Users.list);
-        //   app.get('/api/users', Users.listOne);
           app.delete('/api/users/:id', Users.DeleteUser);
           app.post('/api/users/signin', Users.signin);
           app.post('/api/services', upload.single('image'), Services.post)
