@@ -51,8 +51,7 @@ app.get('/api', function (req, res) {
 });
 app.post('/api/users', _user["default"].signUp); // API route for user to signup
 
-app.get('/api/users', _user["default"].list); //   app.get('/api/users', Users.listOne);
-
+app.get('/api/users', _user["default"].list);
 app["delete"]('/api/users/:id', _user["default"].DeleteUser);
 app.post('/api/users/signin', _user["default"].signin);
 app.post('/api/services', upload.single('image'), _services["default"].post);
