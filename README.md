@@ -26,6 +26,6 @@
   ```sh
    Manzi Fabrice
    ```
-  email: manzif60@gmail.com  twitter: @manzif6 
+  email: manzif60@gmail.com   twitter: @manzif6 
   Project link: https://manzif.github.io/e-services/UI/
    
