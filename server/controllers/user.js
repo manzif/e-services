@@ -1,5 +1,4 @@
 import model from '../models';
-import { getMaxListeners } from 'cluster';
 
 const { User } = model;
 
@@ -10,30 +9,7 @@ class Users {
           .findAll()
           .then(User => res.status(200).send(User));
     }
-    // static listOne(req, res) {
-    //     const id = req.params.id
-    //     User.findOne({
-    //         where: {
-    //             id: req.params.id
-    //         }
-    //     })
-    //         .then(user => {
-    //             if (!user) {
-    //                      .then(User=> res.status(201).send(User));
-    //                     .catch(err => {
-    //                         res.status(400).send('error' + err);
-    //                     })
-    //             }
-    //             else {
-    //                 res.status(409).json({ 
-    //                     error: 'user already exist' })
-    //             }
-    //         })
-    //         .catch(err => {
-    //             res.status(400).send('error' + err);
-    //             console.log(err)
-    //         })
-    // }
+
     static async signUp(req, res) {
     try{  
     const user = {
@@ -48,17 +24,18 @@ class Users {
           User.create(user)
           return res.status(201).json({
             status:201,
-            message:'User was successfuly created'
+            message:'User was successfuly created. Thank you'
         });
         }else{
           return res.status(202).json({
-            message: 'Email already taken.'
+            message: 'The user with the same email already exists. Please Try again!!'
           });
         }
         }catch(error) {
           res.status(500).send({ status: 500, error: error.errors[0].message });
         }
     }
+
     static async DeleteUser(req,res){
         try {
             const id = parseInt(req.params.id);
@@ -84,6 +61,7 @@ class Users {
             }) 
           }
     }
+
   static async signin(req, res) {
     try {
       const findUser = await User.findOne({
@@ -110,7 +88,7 @@ class Users {
       }
       return res.status(404).json({
         status: 404,
-        error: `email or password is incorrect`
+        error: `email or password is incorrect. Please check and try again`
       });
     } catch (error) {
       return res.status(500).json({
