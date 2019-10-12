@@ -1,7 +1,7 @@
 import model from '../models';
 import { read } from 'fs';
 
-const { Service } = model;
+const { Service, User } = model;
 
 class Services {
   static list(req, res) {
@@ -21,9 +21,15 @@ class Services {
     });
   }
 
-  static post(req, res) {
-    const { title, company, description } = req.body;
+  static async post(req, res) {
+    const { title, company, description} = req.body;
     const image = req.file ? req.file.filename : null;
+    const findUser = await User.findOne({
+      where: { email: req.body.email }
+    });
+    if (!findUser) {
+        return res.status(400).send({ message: 'Please create an account first and publish your services.Thank you!' });
+    }
     return Service.create({
       title,
       company,
